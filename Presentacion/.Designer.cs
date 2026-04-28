@@ -161,6 +161,7 @@
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 
@@ -176,6 +177,7 @@
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnNuevo
             // 
@@ -191,6 +193,7 @@
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // groupBox1
             // 
@@ -235,8 +238,12 @@
             // nudTotalPagar
             // 
             this.nudTotalPagar.Location = new System.Drawing.Point(762, 323);
+            this.nudTotalPagar.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.nudTotalPagar.Name = "nudTotalPagar";
-            this.nudTotalPagar.ReadOnly = true;
             this.nudTotalPagar.Size = new System.Drawing.Size(265, 22);
             this.nudTotalPagar.TabIndex = 47;
             // 
@@ -252,8 +259,12 @@
             // nudImpuesto
             // 
             this.nudImpuesto.Location = new System.Drawing.Point(762, 267);
+            this.nudImpuesto.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.nudImpuesto.Name = "nudImpuesto";
-            this.nudImpuesto.ReadOnly = true;
             this.nudImpuesto.Size = new System.Drawing.Size(265, 22);
             this.nudImpuesto.TabIndex = 45;
             // 
@@ -269,8 +280,12 @@
             // nudSubtotal
             // 
             this.nudSubtotal.Location = new System.Drawing.Point(762, 203);
+            this.nudSubtotal.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.nudSubtotal.Name = "nudSubtotal";
-            this.nudSubtotal.ReadOnly = true;
             this.nudSubtotal.Size = new System.Drawing.Size(265, 22);
             this.nudSubtotal.TabIndex = 43;
             // 
@@ -286,8 +301,12 @@
             // nudDescuento
             // 
             this.nudDescuento.Location = new System.Drawing.Point(762, 151);
+            this.nudDescuento.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.nudDescuento.Name = "nudDescuento";
-            this.nudDescuento.ReadOnly = true;
             this.nudDescuento.Size = new System.Drawing.Size(265, 22);
             this.nudDescuento.TabIndex = 41;
             // 
@@ -303,8 +322,12 @@
             // nudCostoTotal
             // 
             this.nudCostoTotal.Location = new System.Drawing.Point(762, 92);
+            this.nudCostoTotal.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.nudCostoTotal.Name = "nudCostoTotal";
-            this.nudCostoTotal.ReadOnly = true;
             this.nudCostoTotal.Size = new System.Drawing.Size(265, 22);
             this.nudCostoTotal.TabIndex = 39;
             // 
@@ -321,7 +344,6 @@
             // 
             this.nudCostoMensual.Location = new System.Drawing.Point(762, 41);
             this.nudCostoMensual.Name = "nudCostoMensual";
-            this.nudCostoMensual.ReadOnly = true;
             this.nudCostoMensual.Size = new System.Drawing.Size(265, 22);
             this.nudCostoMensual.TabIndex = 37;
             // 
@@ -336,7 +358,7 @@
             // 
             // nudCantidadMeses
             // 
-            this.nudCantidadMeses.Location = new System.Drawing.Point(179, 323);
+            this.nudCantidadMeses.Location = new System.Drawing.Point(179, 272);
             this.nudCantidadMeses.Name = "nudCantidadMeses";
             this.nudCantidadMeses.Size = new System.Drawing.Size(311, 22);
             this.nudCantidadMeses.TabIndex = 35;
@@ -344,7 +366,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 329);
+            this.label5.Location = new System.Drawing.Point(32, 278);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(108, 16);
             this.label5.TabIndex = 34;
@@ -354,6 +376,13 @@
             // 
             this.cboxCodigoEntrenador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxCodigoEntrenador.FormattingEnabled = true;
+            this.cboxCodigoEntrenador.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"});
             this.cboxCodigoEntrenador.Location = new System.Drawing.Point(177, 214);
             this.cboxCodigoEntrenador.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboxCodigoEntrenador.Name = "cboxCodigoEntrenador";
@@ -364,6 +393,13 @@
             // 
             this.cboxTipoMembresia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxTipoMembresia.FormattingEnabled = true;
+            this.cboxTipoMembresia.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"});
             this.cboxTipoMembresia.Location = new System.Drawing.Point(179, 151);
             this.cboxTipoMembresia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboxTipoMembresia.Name = "cboxTipoMembresia";
@@ -374,6 +410,13 @@
             // 
             this.cboxCodigoCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxCodigoCliente.FormattingEnabled = true;
+            this.cboxCodigoCliente.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"});
             this.cboxCodigoCliente.Location = new System.Drawing.Point(177, 95);
             this.cboxCodigoCliente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboxCodigoCliente.Name = "cboxCodigoCliente";
@@ -392,7 +435,7 @@
             // dtpFechaInicio
             // 
             this.dtpFechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaInicio.Location = new System.Drawing.Point(179, 277);
+            this.dtpFechaInicio.Location = new System.Drawing.Point(179, 328);
             this.dtpFechaInicio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpFechaInicio.Name = "dtpFechaInicio";
             this.dtpFechaInicio.Size = new System.Drawing.Size(311, 22);
@@ -401,7 +444,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(32, 283);
+            this.label7.Location = new System.Drawing.Point(32, 334);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 16);
             this.label7.TabIndex = 8;
@@ -487,6 +530,7 @@
             this.dgvInscripcionGim.RowTemplate.Height = 24;
             this.dgvInscripcionGim.Size = new System.Drawing.Size(1327, 412);
             this.dgvInscripcionGim.TabIndex = 14;
+            this.dgvInscripcionGim.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInscripcionGim_CellContentClick);
             // 
             // Seleccionar
             // 
@@ -632,6 +676,7 @@
             this.chkSeleccionar.TabIndex = 12;
             this.chkSeleccionar.Text = "Seleccionar";
             this.chkSeleccionar.UseVisualStyleBackColor = true;
+            this.chkSeleccionar.CheckedChanged += new System.EventHandler(this.chkSeleccionar_CheckedChanged);
             // 
             // txtBuscarNombre
             // 

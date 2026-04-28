@@ -37,6 +37,7 @@ namespace Datos
                                     CodigoCliente = Convert.ToInt32(dr["CodigoCliente"]),
                                     CodigoTipoMembresia = Convert.ToInt32(dr["CodigoTipoMembresia"]),
                                     CodigoEntrenador = Convert.ToInt32(dr["CodigoEntrenador"]),
+
                                     Meses = Convert.ToInt32(dr["Meses"]),
                                     FechaInicio = Convert.ToDateTime(dr["FechaInicio"]),
 
@@ -102,8 +103,7 @@ namespace Datos
                     using (SqlCommand cmd = new SqlCommand(QueryAgregar, conn))
                     {
 
-
-                        cmd.Parameters.AddWithValue("@@CodigoCliente", inscripcion.CodigoCliente);
+                        cmd.Parameters.AddWithValue("@CodigoCliente", inscripcion.CodigoCliente);
                         cmd.Parameters.AddWithValue("@CodigoTipoMembresia", inscripcion.CodigoTipoMembresia);
                         cmd.Parameters.AddWithValue("@CodigoEntrenador", inscripcion.CodigoEntrenador);
                         cmd.Parameters.AddWithValue("@Meses", inscripcion.Meses);

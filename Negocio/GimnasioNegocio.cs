@@ -12,7 +12,7 @@ namespace Negocio
     {
         GimnasioDatos gimnasioDatos = new GimnasioDatos();
 
-        /*  ----- Consultar -----   */
+        /*  ----- CONSULTAR -----   */
         public List<GimnasioEntidad> MtdConsultarInscripcion()
         {
             return gimnasioDatos.MtdConsultarInscripcion();

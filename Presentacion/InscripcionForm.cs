@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Entidad;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +24,7 @@ namespace Presentacion
         {
             MtdConsultarInscripcion();
 
-            MtdFilaSeleccionada(false);
+            MtdEstadoFilaSeleccionada(false);
         }
 
         /*  ----- CONSULTAR -----   */
@@ -44,6 +45,7 @@ namespace Presentacion
             }
         }
 
+
         // Contar lineas del DataGridView
         private void MtdActualizarTotalRegistros()
         {
@@ -53,16 +55,19 @@ namespace Presentacion
         }
 
 
+
+
         /*  ----- BOTON NUEVO Y CANCELAR -----   */
 
-        private void MtdFilaSeleccionada(bool estado)
+        // Evento: Valida si hay fila seleccionada del DataGridView
+        private void MtdEstadoFilaSeleccionada(bool estado)
         {
             btnEditar.Enabled = estado;
             btnEliminar.Enabled = estado;
             btnCancelar.Enabled = estado;
             btnImprimir.Enabled = estado;
-            btnNuevo.Enabled = estado;
-            btnGuardar.Enabled = estado;
+            btnNuevo.Enabled = !estado;
+            btnGuardar.Enabled = false;
 
             txtCodigoInscripcion.Enabled = estado;
             cboxCodigoCliente.Enabled = estado;
@@ -80,7 +85,7 @@ namespace Presentacion
         }
 
 
-
+        // Evento: Valida si dieron clic en el boton Nuevo
         private void MtdEstadoBotonNuevo()
         {
             btnEditar.Enabled = false;
@@ -88,27 +93,28 @@ namespace Presentacion
             btnCancelar.Enabled = false;
             btnImprimir.Enabled = false;
             btnNuevo.Enabled = false;
-            btnGuardar.Enabled = false;
+            btnGuardar.Enabled = true;
 
 
             txtCodigoInscripcion.Enabled = false;
             cboxCodigoCliente.Enabled = true;
-            cboxTipoMembresia.Enabled = false;
-            cboxCodigoEntrenador.Enabled = false;
-            nudCantidadMeses.Enabled = false;
-            dtpFechaInicio.Enabled = false;
-            nudCostoMensual.Enabled = false;
-            nudCostoTotal.Enabled = false;
-            nudDescuento.Enabled = false;
+            cboxTipoMembresia.Enabled = true;
+            cboxCodigoEntrenador.Enabled = true;
+            nudCantidadMeses.Enabled = true;
+            dtpFechaInicio.Enabled = true;
+            nudCostoMensual.Enabled = true;
+            nudCostoTotal.Enabled = true;
+            nudDescuento.Enabled = true;
             nudSubtotal.Enabled = true;
             nudImpuesto.Enabled = true;
             nudTotalPagar.Enabled = true;
         }
 
+        // Evento: Limpiar los controles del forms y DataGridView
         private void MtdLimpiarControlesForm()
         {
             txtCodigoInscripcion.Clear();
-            cboxCodigoCliente.Items.Clear();
+            cboxCodigoCliente.SelectedIndex = -1;
             cboxTipoMembresia.SelectedIndex = -1;
             cboxCodigoEntrenador.SelectedIndex = -1;
             nudCantidadMeses.Value = 0;
@@ -133,6 +139,119 @@ namespace Presentacion
             }
         }
 
+        //Boton Nuevo
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            MtdLimpiarControlesForm();
+            MtdEstadoBotonNuevo();
+
+            txtCodigoInscripcion.Focus();
+
+
+        }
+
+        //Boton Cancelar
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            MtdLimpiarControlesForm();
+            MtdEstadoFilaSeleccionada(false);
+
+        }
+
+        /*  ----- DATAGRIDVIEW Y SELECCIONAR   ----- */
+
+        // Cargar datos de la fila a los controles del form
+
+        private void MtdCargarDatosFilaEnControlesForm(int filaSeleccionada)
+        {
+            // ---> CAMBIAR: Nombres por Controles del forms <----- //
+            var inscripcion = (GimnasioEntidad)dgvInscripcionGim.Rows[filaSeleccionada].DataBoundItem;
+
+            txtCodigoInscripcion.Text = inscripcion.CodigoInscripcion.ToString();
+            cboxCodigoCliente.SelectedItem = inscripcion.CodigoCliente;
+            cboxTipoMembresia.SelectedItem = inscripcion.CodigoTipoMembresia;
+            cboxCodigoEntrenador.SelectedItem = inscripcion.CodigoEntrenador;
+            nudCantidadMeses.Value = inscripcion.Meses;
+
+            dtpFechaInicio.Value = inscripcion.FechaInicio;
+
+            nudCostoMensual.Value = inscripcion.CostoMensual;
+            nudCostoTotal.Value = inscripcion.CostoTotal;
+            nudDescuento.Value = inscripcion.Descuento;
+            nudSubtotal.Value = inscripcion.SubTotal;
+            nudImpuesto.Value = inscripcion.Impuesto;
+            nudTotalPagar.Value = inscripcion.TotalPagar;
+
+        }
+
+        // Activar fila seleccionada
+        private int? filaActiva = null;
+        private void MtdActivarFilaSeleccionada(int filaSeleccionada)
+        {
+           
+            if (filaActiva.HasValue)
+            {
+                dgvInscripcionGim.Rows[filaActiva.Value].Cells["Seleccionar"].Value = false;
+                dgvInscripcionGim.Rows[filaActiva.Value].DefaultCellStyle.BackColor = Color.White;
+            }
+
+            filaActiva = filaSeleccionada;
+
+            dgvInscripcionGim.Rows[filaSeleccionada].Cells["Seleccionar"].Value = true;
+            dgvInscripcionGim.Rows[filaSeleccionada].DefaultCellStyle.BackColor = Color.FromArgb(220, 235, 255);
+
+            MtdCargarDatosFilaEnControlesForm(filaSeleccionada);
+            MtdEstadoFilaSeleccionada(true);
+        }
+
+        // Desactivar fila seleccionada
+        private void MtdDesactivaFilaSeleccionada()
+        {
+            // ---> CAMBIAR: Nombre del DataGridView <----- //
+            if (filaActiva.HasValue)
+            {
+                dgvInscripcionGim.Rows[filaActiva.Value].Cells["Seleccionar"].Value = false;
+                dgvInscripcionGim.Rows[filaActiva.Value].DefaultCellStyle.BackColor = Color.White;
+            }
+
+            filaActiva = null;
+
+            MtdLimpiarControlesForm();
+            MtdEstadoFilaSeleccionada(false);
+        }
+
+        // Evento DataGridView
+        private void dgvInscripcionGim_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            if (dgvInscripcionGim.Columns[e.ColumnIndex].Name != "Seleccionar")
+                return;
+
+            if (!chkSeleccionar.Checked)
+                return;
+
+            bool seleccionado = Convert.ToBoolean(
+                dgvInscripcionGim.Rows[e.RowIndex].Cells["Seleccionar"].Value ?? false);
+
+            if (seleccionado)
+                MtdDesactivaFilaSeleccionada();
+            else
+                MtdActivarFilaSeleccionada(e.RowIndex);
+
+        }
+
+        // Evento CheckBox Seleccionar
+        private void chkSeleccionar_CheckedChanged(object sender, EventArgs e)
+        {
+            dgvInscripcionGim.Columns["Seleccionar"].ReadOnly = !chkSeleccionar.Checked;
+            btnEditar.Enabled = chkSeleccionar.Checked;
+
+            MtdDesactivaFilaSeleccionada();
+
+        }
+
 
         /*  ----- AGREGAR -----   */
 
@@ -143,15 +262,54 @@ namespace Presentacion
         }
 
 
+        // Boton Guardar
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (MtdValidaDatos() == false)
+                return;
+
+            try
+            {
 
 
 
+                GimnasioEntidad inscripcion = new GimnasioEntidad
+                {
+                    //CodigoInscripcion = Convert.ToInt32(txtCodigoInscripcion.Text.Trim()),
+                    CodigoCliente = Convert.ToInt32(cboxCodigoCliente.SelectedItem.ToString()),
+                    CodigoTipoMembresia = Convert.ToInt32(cboxTipoMembresia.SelectedItem.ToString()),
+                    CodigoEntrenador = Convert.ToInt32(cboxCodigoEntrenador.SelectedItem.ToString()),
+                    Meses = Convert.ToInt32(nudCantidadMeses.Value),
+                    FechaInicio = dtpFechaInicio.Value,
+
+                    
+
+                    CostoMensual = Convert.ToDecimal(nudCostoMensual.Value),
+                    CostoTotal = Convert.ToDecimal(nudCostoTotal.Value),
+                    Descuento = Convert.ToDecimal(nudDescuento.Value),
+                    SubTotal = Convert.ToDecimal(nudSubtotal.Value),
+                    Impuesto = Convert.ToDecimal(nudImpuesto.Value),
+                    TotalPagar = Convert.ToDecimal(nudTotalPagar.Value),
 
 
 
+                };
+
+                gimnasioNegocio.MtdAgregarInscripcion(inscripcion);
+                MessageBox.Show("Inscripcion agregada correctamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MtdLimpiarControlesForm();
+                MtdConsultarInscripcion();
+                MtdEstadoFilaSeleccionada(false);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
+        }
 
 
-    }
-}
+    }//class
+}//namespace
