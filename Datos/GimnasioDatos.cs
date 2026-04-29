@@ -208,7 +208,7 @@ namespace Datos
 
                     string query = @"		SELECT *
 	                                        FROM Tbl_Inscripcion
-	                                        WHERE CodigoCliente LIKE '%' + @CodigoCliente + '%';";
+	                                        WHERE CodigoCliente = @CodigoCliente;";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
