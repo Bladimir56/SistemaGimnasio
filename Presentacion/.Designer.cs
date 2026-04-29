@@ -345,6 +345,11 @@
             // nudCostoMensual
             // 
             this.nudCostoMensual.Location = new System.Drawing.Point(762, 41);
+            this.nudCostoMensual.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.nudCostoMensual.Name = "nudCostoMensual";
             this.nudCostoMensual.Size = new System.Drawing.Size(265, 22);
             this.nudCostoMensual.TabIndex = 37;
@@ -610,6 +615,7 @@
             this.btnExportar.Text = "Exportar";
             this.btnExportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExportar.UseVisualStyleBackColor = true;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // btnImprimir
             // 

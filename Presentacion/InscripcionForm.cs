@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 
 namespace Presentacion
 {
@@ -440,6 +441,8 @@ namespace Presentacion
 
 
         #region Codigo Imprimir
+
+        /*-------IMPRIMIR--------*/
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             Font tituloFont = new Font("Arial", 16, FontStyle.Bold);
@@ -503,6 +506,102 @@ namespace Presentacion
                 MessageBox.Show(ex.Message, "Error al imprimir", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+        #endregion
+
+        #region Codigo Exportar
+
+        /* ---- EXPORTAR ---- */
+
+        //Boton Exportar
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            // ---> CAMBIAR: Nombre a DataGridView
+            if (dgvInscripcionGim.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay registros para exportar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // ---> CAMBIAR: Nombre al archivo de excel a exportar
+                SaveFileDialog saveFile = new SaveFileDialog
+                {
+                    Filter = "Archivo Excel (*.xlsx)|*.xlsx",
+                    FileName = "Listado_Inscripciones_Gimnasio.xlsx"
+                };
+
+                if (saveFile.ShowDialog() != DialogResult.OK)
+                    return;
+
+                // ---> CAMBIAR: Nombre a pestaña de excel (hoja)
+                using (XLWorkbook wb = new XLWorkbook())
+                {
+                    var ws = wb.Worksheets.Add("Inscripciones");
+
+                    int colIndex = 1;
+
+                    //  Encabezados 
+                    foreach (DataGridViewColumn col in dgvInscripcionGim.Columns)
+                    {
+                        if (col.Visible && col.Name != "Seleccionar")
+                        {
+                            ws.Cell(1, colIndex).Value = col.HeaderText;
+                            ws.Cell(1, colIndex).Style.Font.Bold = true;
+                            colIndex++;
+                        }
+                    }
+
+                    //  Datos DataGridView
+                    int rowIndex = 2;
+
+                    foreach (DataGridViewRow row in dgvInscripcionGim.Rows)
+                    {
+                        colIndex = 1;
+
+                        foreach (DataGridViewColumn col in dgvInscripcionGim.Columns)
+                        {
+                            if (col.Visible && col.Name != "Seleccionar")
+                            {
+                                object valorCelda = row.Cells[col.Name].Value;
+
+                                if (valorCelda is DateTime fecha)
+                                {
+                                    // Mostrar solo fecha (sin hora)
+                                    ws.Cell(rowIndex, colIndex).Value = fecha.ToString("dd/MM/yyyy");
+                                }
+                                else if (valorCelda is bool estado)
+                                {
+                                    // Convertir true / false a Activo / Inactivo
+                                    ws.Cell(rowIndex, colIndex).Value = estado ? "Activo" : "Inactivo";
+                                }
+                                else
+                                {
+                                    // Mostrar valores con formato del datagridview
+                                    ws.Cell(rowIndex, colIndex).Value = valorCelda?.ToString();
+                                }
+                                colIndex++;
+                            }
+                        }
+
+                        rowIndex++;
+                    }
+
+                    ws.Columns().AdjustToContents();
+                    wb.SaveAs(saveFile.FileName);
+                }
+
+                MessageBox.Show("Archivo exportado correctamente.", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al exportar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
         #endregion
 
 
