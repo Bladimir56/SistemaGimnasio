@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using Entidad;
 
 namespace Datos
 {
@@ -187,6 +188,54 @@ namespace Datos
             }
         }
         #endregion
+
+
+        //No contiene nada, al momento lo subira carlos
+        #region Codigo Eliminar
+        #endregion
+
+
+        #region Codigo BuscarLimpiar
+
+        /* ---- BUSCAR ---- */
+        public DataTable MtdBuscarInscripcion(int CodigoCliente)
+        {
+            try
+            {
+                using (SqlConnection conn = conexionDatos.MtdConexionDB())
+                {
+                    conn.Open();
+
+                    string query = @"		SELECT *
+	                                        FROM Tbl_Inscripcion
+	                                        WHERE CodigoCliente LIKE '%' + @CodigoCliente + '%';";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@CodigoCliente", CodigoCliente);
+
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        return dt;
+                    }
+                }
+            }
+            catch (SqlException exSql)
+            {
+                throw new Exception("Error al buscar inscripcion: " + exSql.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error general al buscar inscripcion: " + ex.Message);
+            }
+        }
+
+
+        #endregion
+
 
 
 

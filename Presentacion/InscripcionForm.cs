@@ -378,7 +378,64 @@ namespace Presentacion
             }
 
         }
+
+
+
         #endregion
+
+
+        //No contiene nada, al momento lo subira carlos
+        #region Codigo Eliminar
+        #endregion
+
+        #region Codigo BuscarLimpiar
+        /*  ----- BUSCAR / LIMPIAR  ----- */
+
+        //Boton buscar
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            int CodigoCliente;
+
+            CodigoCliente = Convert.ToInt32(txtBuscarNombre.Text);
+
+            try
+            {
+                List<GimnasioEntidad> lista = gimnasioNegocio.MtdBuscarInscripcion(CodigoCliente);
+
+                dgvInscripcionGim.DataSource = lista;
+
+                MtdLimpiarControlesForm();
+                MtdEstadoFilaSeleccionada(false);
+                MtdActualizarTotalRegistros();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
+
+        //Boton limpiar
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            {
+                txtBuscarNombre.Clear();
+                MtdConsultarInscripcion();
+
+                MtdLimpiarControlesForm();
+                MtdEstadoFilaSeleccionada(false);
+                MtdActualizarTotalRegistros();
+            }
+
+
+
+        }
+
+        #endregion
+
+
 
     }//class
 }//namespace
