@@ -386,9 +386,58 @@ namespace Presentacion
         #endregion
 
 
-        //No contiene nada, al momento lo subira carlos
+
         #region Codigo Eliminar
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCodigoInscripcion.Text))
+            {
+                MessageBox.Show("Seleccione un alumno para eliminar", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la inscripcion seleccionada?", "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (respuesta != DialogResult.Yes)
+                return;
+
+            try
+            {
+                int codigoInscripcion = Convert.ToInt32(txtCodigoInscripcion.Text);
+
+                bool ValidaEliminacion = gimnasioNegocio.MtdEliminarInscripcion(codigoInscripcion);
+
+                if (!ValidaEliminacion)
+                {
+                    MessageBox.Show("No se pudo eliminar el registro seleccionado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+
+                    MessageBox.Show("Inscripcion eliminada correctamente", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MtdDesactivaFilaSeleccionada();
+                    MtdConsultarInscripcion();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error al eliminar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
+
+
+
+
+
+
         #endregion
+
 
         #region Codigo BuscarLimpiar
         /*  ----- BUSCAR / LIMPIAR  ----- */
@@ -510,6 +559,7 @@ namespace Presentacion
 
         #endregion
 
+
         #region Codigo Exportar
 
         /* ---- EXPORTAR ---- */
@@ -601,6 +651,9 @@ namespace Presentacion
             }
 
         }
+
+
+
 
         #endregion
 

@@ -44,10 +44,17 @@ namespace Negocio
 
         #endregion
 
-
-
-        //No contiene nada, al momento lo subira carlos
+        
         #region Codigo Eliminar
+
+        /*  ----- ELIMINAR ----- */
+
+        public bool MtdEliminarInscripcion(int CodigoInscripcion)
+        {
+            return gimnasioDatos.MtdEliminarInscripcion(CodigoInscripcion);
+        }
+
+
         #endregion
 
 

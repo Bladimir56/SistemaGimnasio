@@ -190,8 +190,34 @@ namespace Datos
         #endregion
 
 
-        //No contiene nada, al momento lo subira carlos
         #region Codigo Eliminar
+
+        /*  ----- ELIMINAR ----- */
+        public bool MtdEliminarInscripcion(int CodigoInscripcion)
+        {
+            try
+            {
+                using (SqlConnection conn = conexionDatos.MtdConexionDB())
+                {
+                    conn.Open();
+                    string QueryEliminar = @"DELETE FROM Tbl_Inscripcion
+	                                               WHERE CodigoInscripcion = @CodigoInscripcion;";
+
+                    using (SqlCommand cmd = new SqlCommand(QueryEliminar, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@CodigoInscripcion", CodigoInscripcion);
+
+                        return cmd.ExecuteNonQuery() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar la inscripcion", ex);
+            }
+        }
+
+
         #endregion
 
 
