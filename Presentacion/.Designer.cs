@@ -146,6 +146,7 @@
             this.btnEditar.Text = "Editar";
             this.btnEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnGuardar
             // 
@@ -381,8 +382,7 @@
             "2",
             "3",
             "4",
-            "5",
-            "6"});
+            "5"});
             this.cboxCodigoEntrenador.Location = new System.Drawing.Point(177, 214);
             this.cboxCodigoEntrenador.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboxCodigoEntrenador.Name = "cboxCodigoEntrenador";
@@ -398,8 +398,7 @@
             "2",
             "3",
             "4",
-            "5",
-            "6"});
+            "5"});
             this.cboxTipoMembresia.Location = new System.Drawing.Point(179, 151);
             this.cboxTipoMembresia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboxTipoMembresia.Name = "cboxTipoMembresia";
@@ -415,8 +414,7 @@
             "2",
             "3",
             "4",
-            "5",
-            "6"});
+            "5"});
             this.cboxCodigoCliente.Location = new System.Drawing.Point(177, 95);
             this.cboxCodigoCliente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboxCodigoCliente.Name = "cboxCodigoCliente";

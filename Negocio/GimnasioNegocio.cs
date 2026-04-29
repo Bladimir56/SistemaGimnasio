@@ -27,6 +27,14 @@ namespace Negocio
         }
 
 
+        /*  ----- EDITAR ----- */
+
+        public bool MtdEditarInscripcion(GimnasioEntidad inscripcion)
+        {
+
+            return gimnasioDatos.MtdEditarInscripcion(inscripcion);
+        }
+
 
 
 

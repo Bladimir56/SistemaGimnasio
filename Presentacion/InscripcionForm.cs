@@ -27,6 +27,7 @@ namespace Presentacion
             MtdEstadoFilaSeleccionada(false);
         }
 
+
         /*  ----- CONSULTAR -----   */
 
         // Consultar datos de la tabla e imprimir en DataGridView
@@ -56,7 +57,7 @@ namespace Presentacion
 
 
 
-
+        
         /*  ----- BOTON NUEVO Y CANCELAR -----   */
 
         // Evento: Valida si hay fila seleccionada del DataGridView
@@ -138,6 +139,10 @@ namespace Presentacion
 
             }
         }
+
+        
+
+
 
         //Boton Nuevo
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -307,6 +312,63 @@ namespace Presentacion
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+
+        }
+
+
+        /*  ----- EDITAR -----   */
+
+        //Boton Editar
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCodigoInscripcion.Text))
+            {
+                MessageBox.Show("Seleccione una inscripcion para editar", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+
+            }
+
+            if (MtdValidaDatos() == false)
+                return;
+
+            try
+            {
+
+
+                GimnasioEntidad inscripcion = new GimnasioEntidad
+                {
+                    //Agregar
+                    CodigoInscripcion = int.Parse(txtCodigoInscripcion.Text),
+
+
+                    //Este codigo esta en el boton Guardar
+                    CodigoCliente = Convert.ToInt32(cboxCodigoCliente.SelectedItem.ToString()),
+                    CodigoTipoMembresia = Convert.ToInt32(cboxTipoMembresia.SelectedItem.ToString()),
+                    CodigoEntrenador = Convert.ToInt32(cboxCodigoEntrenador.SelectedItem.ToString()),
+                    Meses = Convert.ToInt32(nudCantidadMeses.Value),
+                    FechaInicio = dtpFechaInicio.Value,
+
+
+                    CostoMensual = Convert.ToDecimal(nudCostoMensual.Value),
+                    CostoTotal = Convert.ToDecimal(nudCostoTotal.Value),
+                    Descuento = Convert.ToDecimal(nudDescuento.Value),
+                    SubTotal = Convert.ToDecimal(nudSubtotal.Value),
+                    Impuesto = Convert.ToDecimal(nudImpuesto.Value),
+                    TotalPagar = Convert.ToDecimal(nudTotalPagar.Value),
+
+                };
+
+                gimnasioNegocio.MtdEditarInscripcion(inscripcion);
+                MessageBox.Show("inscripcion editado correctamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MtdLimpiarControlesForm();
+                MtdConsultarInscripcion();
+                MtdEstadoFilaSeleccionada(false);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
