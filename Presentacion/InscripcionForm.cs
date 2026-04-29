@@ -27,7 +27,7 @@ namespace Presentacion
             MtdEstadoFilaSeleccionada(false);
         }
 
-
+        #region Codigo Consultar
         /*  ----- CONSULTAR -----   */
 
         // Consultar datos de la tabla e imprimir en DataGridView
@@ -55,9 +55,10 @@ namespace Presentacion
             lblTotalRegistros.Text = $"Cantidad registros: {total}";
         }
 
+        #endregion
 
 
-        
+        #region Funcionalidades Sistema
         /*  ----- BOTON NUEVO Y CANCELAR -----   */
 
         // Evento: Valida si hay fila seleccionada del DataGridView
@@ -257,7 +258,11 @@ namespace Presentacion
 
         }
 
+        // Ultimo Paso, Agregar MtdEstadoFilaSelecionada en el evento Form. que esta en el inicio
+        #endregion
 
+
+        #region Codigo Agregar
         /*  ----- AGREGAR -----   */
 
         // Validar que los datos estén correctos
@@ -314,8 +319,10 @@ namespace Presentacion
 
 
         }
+        #endregion
 
 
+        #region Codigo Editar
         /*  ----- EDITAR -----   */
 
         //Boton Editar
@@ -371,7 +378,7 @@ namespace Presentacion
             }
 
         }
-
+        #endregion
 
     }//class
 }//namespace

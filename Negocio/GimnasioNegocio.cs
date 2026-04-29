@@ -12,21 +12,27 @@ namespace Negocio
     {
         GimnasioDatos gimnasioDatos = new GimnasioDatos();
 
+
+        #region Codigo Consultar 
         /*  ----- CONSULTAR -----   */
         public List<GimnasioEntidad> MtdConsultarInscripcion()
         {
             return gimnasioDatos.MtdConsultarInscripcion();
         }
+        #endregion
 
 
+        #region Codigo Agregar
         /*  ----- AGREGAR ----- */
 
         public bool MtdAgregarInscripcion(GimnasioEntidad inscripcion)
         {
             return gimnasioDatos.MtdAgregarInscripcion(inscripcion);
         }
+        #endregion
 
 
+        #region Codigo Editar
         /*  ----- EDITAR ----- */
 
         public bool MtdEditarInscripcion(GimnasioEntidad inscripcion)
@@ -35,7 +41,7 @@ namespace Negocio
             return gimnasioDatos.MtdEditarInscripcion(inscripcion);
         }
 
-
+        #endregion
 
 
 

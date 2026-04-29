@@ -12,6 +12,7 @@ namespace Datos
     {
         Conexion conexionDatos = new Conexion(); // Instanciar
 
+        #region Codigo Consultar
         /*  ----- CONSULTAR -----   */
         public List<GimnasioEntidad> MtdConsultarInscripcion()
         {
@@ -62,6 +63,11 @@ namespace Datos
                 throw new Exception("Error al mostrar la lista" + ex.Message);
             }
         }
+
+        #endregion
+
+
+        #region Codigo Agregar
 
         /*  ----- AGREGAR ----- */
         public bool MtdAgregarInscripcion(GimnasioEntidad inscripcion)
@@ -124,8 +130,10 @@ namespace Datos
                 throw new Exception("Error al Agregar inscripción en la base de datos", ex);
             }
         }
+        #endregion
 
 
+        #region Codigo Editar
         /*  ----- EDITAR ----- */
 
         public bool MtdEditarInscripcion(GimnasioEntidad inscripcion)
@@ -178,7 +186,7 @@ namespace Datos
                 throw new Exception("Error al Editar inscripcion en la base de datos", ex);
             }
         }
-
+        #endregion
 
 
 
