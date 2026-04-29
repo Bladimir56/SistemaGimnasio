@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -433,6 +434,75 @@ namespace Presentacion
 
         }
 
+
+
+        #endregion
+
+
+        #region Codigo Imprimir
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Font tituloFont = new Font("Arial", 16, FontStyle.Bold);
+            Font textFont = new Font("Arial", 11);
+            Brush brush = Brushes.Black;
+
+            float y = 40;
+            float margenizquierdo = 50;
+
+            // ---> CAMBIAR: cambiar nombres a controles y titutlo
+
+            e.Graphics.DrawString("DATOS DE LA INSCRIPCION", textFont, brush, margenizquierdo, y); y += 40;
+
+
+            e.Graphics.DrawString($"CodigoInscripcion: {txtCodigoInscripcion.Text}", textFont, brush, margenizquierdo, y); y += 25;
+            e.Graphics.DrawString($"CodigoCliente: {cboxCodigoCliente.SelectedItem}", textFont, brush, margenizquierdo, y); y += 25;
+            e.Graphics.DrawString($"CodigoTipoMembresia: {cboxTipoMembresia.SelectedItem}", textFont, brush, margenizquierdo, y); y += 25;
+            e.Graphics.DrawString($"CodigoEntrenador: {cboxCodigoEntrenador.SelectedItem}", textFont, brush, margenizquierdo, y); y += 25;
+            e.Graphics.DrawString($"Meses: {nudCantidadMeses.Value}", textFont, brush, margenizquierdo, y); y += 25;
+
+            e.Graphics.DrawString($"FechaInicio: {dtpFechaInicio.Value:d}", textFont, brush, margenizquierdo, y); y += 25;
+
+            e.Graphics.DrawString($"CostoMensual: {nudCostoMensual.Value}", textFont, brush, margenizquierdo, y); y += 25;
+            e.Graphics.DrawString($"CostoTotal: {nudCostoTotal.Value}", textFont, brush, margenizquierdo, y); y += 25;
+            e.Graphics.DrawString($"Descuento: {nudDescuento.Value}", textFont, brush, margenizquierdo, y); y += 25;
+            e.Graphics.DrawString($"SubTotal: {nudSubtotal.Value}", textFont, brush, margenizquierdo, y); y += 25;
+            e.Graphics.DrawString($"Impuesto: {nudImpuesto.Value}", textFont, brush, margenizquierdo, y); y += 25;
+            e.Graphics.DrawString($"TotalPagar: {nudTotalPagar.Value}", textFont, brush, margenizquierdo, y); y += 25; 
+
+        }
+
+        // Boton imprimir
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCodigoInscripcion.Text))
+            {
+                MessageBox.Show("Seleccione un registro a imprimir", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                printDocument1.DefaultPageSettings.Margins = new Margins(20, 20, 20, 20);
+
+                int AltoDocumento = 350;
+                int AnchoDocumento = 400;
+
+                printDocument1.DefaultPageSettings.PaperSize = new PaperSize("Documento", AnchoDocumento, AltoDocumento);
+
+                PrintPreviewDialog preview = new PrintPreviewDialog
+                {
+                    Document = printDocument1,
+                    WindowState = FormWindowState.Maximized
+                };
+
+                preview.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error al imprimir", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         #endregion
 
 

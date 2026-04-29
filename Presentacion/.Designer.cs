@@ -76,6 +76,7 @@
             this.lblTotalRegistros = new System.Windows.Forms.Label();
             this.chkSeleccionar = new System.Windows.Forms.CheckBox();
             this.txtBuscarNombre = new System.Windows.Forms.TextBox();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.picPrestamoLibros)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTotalPagar)).BeginInit();
@@ -624,6 +625,7 @@
             this.btnImprimir.Text = "Imprimir";
             this.btnImprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // btnLimpiar
             // 
@@ -685,6 +687,10 @@
             this.txtBuscarNombre.Name = "txtBuscarNombre";
             this.txtBuscarNombre.Size = new System.Drawing.Size(468, 22);
             this.txtBuscarNombre.TabIndex = 11;
+            // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
             // RentaVehiculosForm
             // 
@@ -768,5 +774,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown nudCostoMensual;
         private System.Windows.Forms.Label label8;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }
