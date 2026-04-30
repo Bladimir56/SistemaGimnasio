@@ -101,5 +101,62 @@ namespace Negocio
         #endregion
 
 
+        #region Metodos Sistema
+
+        /*-------METODOS-------*/
+
+        const double PorcentajeDescuento = 0.10;
+        const double PorcentajeImpuesto = 0.12;
+
+        // Método CostoMensual
+        public double MtdCostoMensual(int TipoMembresia)
+        {
+            //Enviando segun el tipo de mebresia se asigna un costo mensual
+            if (TipoMembresia == 1) return 450;
+            else if (TipoMembresia == 2) return 500;
+            else if (TipoMembresia == 3) return 515;
+            else if (TipoMembresia == 4) return 716;
+            else if (TipoMembresia == 5) return 950;
+            return 0;
+        }
+        
+
+        //Metodo Costo total
+        public double MtdCostoTotal(int Meses, double CostoMensual)
+        {
+            return Meses * CostoMensual;
+        }
+
+        //Metodo Descuento
+        public double MtdDescuento(int Meses, double CostoTotal)
+        {
+            if (Meses >= 6)
+                return CostoTotal * PorcentajeDescuento; 
+
+            return 0;
+        }
+
+        //Metodo Subtotal
+        public double MtdSubTotal(double CostoTotal, double Descuento)
+        {
+            return CostoTotal - Descuento;
+        }
+
+        //Metodo Impuesto
+        public double MtdImpuesto(double SubTotal)
+        {
+            return SubTotal * PorcentajeImpuesto;
+        }
+
+
+        //Metodo TotalPagar
+        public double MtdTotalPagar(double SubTotal, double Impuesto)
+        {
+            return SubTotal + Impuesto;
+        }
+
+        #endregion
+
+
     }
 }

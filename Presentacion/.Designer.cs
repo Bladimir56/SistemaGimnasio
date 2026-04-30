@@ -247,6 +247,7 @@
             0,
             0});
             this.nudTotalPagar.Name = "nudTotalPagar";
+            this.nudTotalPagar.ReadOnly = true;
             this.nudTotalPagar.Size = new System.Drawing.Size(265, 22);
             this.nudTotalPagar.TabIndex = 47;
             // 
@@ -268,6 +269,7 @@
             0,
             0});
             this.nudImpuesto.Name = "nudImpuesto";
+            this.nudImpuesto.ReadOnly = true;
             this.nudImpuesto.Size = new System.Drawing.Size(265, 22);
             this.nudImpuesto.TabIndex = 45;
             // 
@@ -289,6 +291,7 @@
             0,
             0});
             this.nudSubtotal.Name = "nudSubtotal";
+            this.nudSubtotal.ReadOnly = true;
             this.nudSubtotal.Size = new System.Drawing.Size(265, 22);
             this.nudSubtotal.TabIndex = 43;
             // 
@@ -310,6 +313,7 @@
             0,
             0});
             this.nudDescuento.Name = "nudDescuento";
+            this.nudDescuento.ReadOnly = true;
             this.nudDescuento.Size = new System.Drawing.Size(265, 22);
             this.nudDescuento.TabIndex = 41;
             // 
@@ -331,6 +335,7 @@
             0,
             0});
             this.nudCostoTotal.Name = "nudCostoTotal";
+            this.nudCostoTotal.ReadOnly = true;
             this.nudCostoTotal.Size = new System.Drawing.Size(265, 22);
             this.nudCostoTotal.TabIndex = 39;
             // 
@@ -352,6 +357,7 @@
             0,
             0});
             this.nudCostoMensual.Name = "nudCostoMensual";
+            this.nudCostoMensual.ReadOnly = true;
             this.nudCostoMensual.Size = new System.Drawing.Size(265, 22);
             this.nudCostoMensual.TabIndex = 37;
             // 
@@ -370,6 +376,7 @@
             this.nudCantidadMeses.Name = "nudCantidadMeses";
             this.nudCantidadMeses.Size = new System.Drawing.Size(311, 22);
             this.nudCantidadMeses.TabIndex = 35;
+            this.nudCantidadMeses.ValueChanged += new System.EventHandler(this.nudCantidadMeses_ValueChanged);
             // 
             // label5
             // 
@@ -411,6 +418,7 @@
             this.cboxTipoMembresia.Name = "cboxTipoMembresia";
             this.cboxTipoMembresia.Size = new System.Drawing.Size(313, 24);
             this.cboxTipoMembresia.TabIndex = 32;
+            this.cboxTipoMembresia.SelectedIndexChanged += new System.EventHandler(this.cboxTipoMembresia_SelectedIndexChanged);
             // 
             // cboxCodigoCliente
             // 

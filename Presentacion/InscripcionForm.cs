@@ -655,8 +655,56 @@ namespace Presentacion
 
 
 
+
+
         #endregion
 
+        #region Metodos
+
+        private void cboxTipoMembresia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int TipoMembresia = Convert.ToInt32(cboxTipoMembresia.SelectedItem);
+
+
+            double CostoMensual = gimnasioNegocio.MtdCostoMensual(TipoMembresia);
+
+            nudCostoMensual.Value = Convert.ToDecimal(CostoMensual);
+        }
+
+
+        private void nudCantidadMeses_ValueChanged(object sender, EventArgs e)
+        {
+
+
+            int Meses = Convert.ToInt32(nudCantidadMeses.Value);
+            //se convirtiio a double porque ya lo estaba reconociendo como double arriba
+            double CostoMensual = Convert.ToDouble(nudCostoMensual.Value);
+
+            //Costo Total
+            double CostoTotal = gimnasioNegocio.MtdCostoTotal(Meses, CostoMensual);
+            nudCostoTotal.Value = Convert.ToDecimal(CostoTotal);
+
+            //Descuento
+            double Descuento = gimnasioNegocio.MtdDescuento(Meses, CostoTotal);
+            nudDescuento.Value = Convert.ToDecimal(Descuento);
+
+            //Subtotal
+            double SubTotal = gimnasioNegocio.MtdSubTotal(CostoTotal, Descuento);
+            nudSubtotal.Value = Convert.ToDecimal(SubTotal);
+
+            //Impuesto
+            double Impuesto = gimnasioNegocio.MtdImpuesto(SubTotal);
+            nudImpuesto.Value = Convert.ToDecimal(Impuesto);
+
+            //TotalPagar
+            double TotalPagar = gimnasioNegocio.MtdTotalPagar(SubTotal, Impuesto);
+            nudTotalPagar.Value = Convert.ToDecimal(TotalPagar);
+
+
+
+        }
+
+        #endregion
 
 
     }//class

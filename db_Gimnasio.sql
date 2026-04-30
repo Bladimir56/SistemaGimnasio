@@ -142,7 +142,7 @@
 		@TotalPagar
 	);
 
-	-- Actualizar
+	-- Editar
 	UPDATE Tbl_Inscripcion
 	SET
 		CodigoCliente = @CodigoCliente,
@@ -157,6 +157,7 @@
 		Impuesto = @Impuesto,
 		TotalPagar = @TotalPagar
 	WHERE CodigoInscripcion = @CodigoInscripcion;
+
 	?? ? DELETE
 
 	-- Eliminar
@@ -180,5 +181,8 @@
 	FROM Tbl_Inscripcion
 	WHERE CodigoInscripcion = @CodigoInscripcion;
 
-
+	--Buscar
+	SELECT *
+	FROM Tbl_Inscripcion
+	WHERE CodigoInscripcion LIKE '%' + @CodigoInscripcion + '%';
 
